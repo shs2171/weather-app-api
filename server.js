@@ -23,20 +23,24 @@ app.use(express.static('website'));
 //Get route to return project data
 app.get('/all', function (req, res) {
     res.send(projectData);
+    console.log(projectData);
   });
 //Post route to add incoming data to project data
 app.post('/add', addData);
 function addData(req,res){
-    console.log(req.body);
-    projectData['temperature'] = req.body.temp;
-    projectData['date'] = req.body.date;
-    projectData['userResponse'] = req.body.userResponse;
-    console.log(projectData)
+    newEntry={
+        temperature: req.body.temperature,
+        date: req.body.date,
+        userResponse: req.body.userResponse
+    }
+    projectData=newEntry;
+    console.log(projectData);
     res.send(projectData);
+   
 
 };
 // Setup Server
-const port=8080;
+const port=8000;
 const server = app.listen(port, listening);
 function listening(){
     console.log(`running on localhost: ${port}`);
